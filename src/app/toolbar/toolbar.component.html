@@ -1,0 +1,8 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row class="navbar">
+    <span>Covid-19 Data Center</span>
+    <span class="example-spacer"></span>
+    <mat-slide-toggle [checked]="isDarkTheme | async" (change)="toggleDarkTheme($event.checked)">
+      Dark theme</mat-slide-toggle>
+  </mat-toolbar-row>
+</mat-toolbar>

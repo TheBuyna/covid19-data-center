@@ -1,0 +1,69 @@
+<div class="mat-elevation-z2">
+  <mat-form-field>
+    <mat-label>Filter</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Search...">
+  </mat-form-field>
+
+  <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+
+    <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+
+    <!-- Country Nam Column -->
+    <ng-container matColumnDef="Country" sticky>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Country </th>
+      <td mat-cell *matCellDef="let element"> {{element.Country}} </td>
+    </ng-container>
+
+    <!-- Confirmed Cases Column -->
+    <ng-container matColumnDef="TotalConfirmed">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Confirmed </th>
+      <td mat-cell *matCellDef="let element"> {{element.TotalConfirmed}}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="NewConfirmed">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>New Confirmed
+      </th>
+      <td mat-cell *matCellDef="let element">
+        <mat-icon aria-hidden="false" aria-label="Up icon">trending_up
+        </mat-icon>
+        {{element.NewConfirmed}}
+      </td>
+    </ng-container>
+
+    <!-- Death Cases Column -->
+    <ng-container matColumnDef="TotalDeaths">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Deaths </th>
+      <td mat-cell *matCellDef="let element"> {{element.TotalDeaths}} </td>
+    </ng-container>
+    <ng-container matColumnDef="NewDeaths">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>New Deaths
+      </th>
+      <td mat-cell *matCellDef="let element">
+        <mat-icon naria-hidden="false" aria-label="Up icon">trending_up</mat-icon>
+        {{element.NewDeaths}}
+      </td>
+    </ng-container>
+
+    <!-- Recovered Cases Column -->
+    <ng-container matColumnDef="TotalRecovered">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Recovered </th>
+      <td mat-cell *matCellDef="let element"> {{element.TotalRecovered}} </td>
+    </ng-container>
+    <ng-container matColumnDef="NewRecovered">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> New Recovered </th>
+      <td mat-cell *matCellDef="let element"> {{element.NewRecovered}} </td>
+    </ng-container>
+
+    <!-- Date Column -->
+    <ng-container matColumnDef="Date">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Last Updated </th>
+      <td mat-cell *matCellDef="let element"> {{element.Date | date : 'dd/MM/yy HH:mm:ss' }} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns;sticky: true"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  <mat-paginator [pageSizeOptions]="[20,10,5]" showFirstLastButtons>
+  </mat-paginator>
+</div>
