@@ -18,9 +18,12 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatDialogModule } from '@angular/material/dialog';
+import { DialogComponent } from './dialog/dialog.component';
 
 @NgModule({
-  declarations: [AppComponent, SummaryComponent, ToolbarComponent],
+  declarations: [AppComponent, SummaryComponent, ToolbarComponent, DialogComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -35,6 +38,8 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     MatFormFieldModule,
     MatInputModule,
     MatSlideToggleModule,
+    MatProgressBarModule,
+    MatDialogModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

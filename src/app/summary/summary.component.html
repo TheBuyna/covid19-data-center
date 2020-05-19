@@ -1,4 +1,5 @@
 <div class="mat-elevation-z2">
+  <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
   <mat-form-field>
     <mat-label>Filter</mat-label>
     <input matInput (keyup)="applyFilter($event)" placeholder="Search...">
@@ -18,7 +19,7 @@
     <!-- Confirmed Cases Column -->
     <ng-container matColumnDef="TotalConfirmed">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Confirmed </th>
-      <td mat-cell *matCellDef="let element"> {{element.TotalConfirmed}}
+      <td mat-cell *matCellDef="let element"> {{element.TotalConfirmed | number: '1.0-0'}}
       </td>
     </ng-container>
     <ng-container matColumnDef="NewConfirmed">

@@ -10,12 +10,15 @@ import {
   Breakpoints,
   BreakpointState,
 } from '@angular/cdk/layout';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogComponent } from '../dialog/dialog.component';
 @Component({
   selector: 'app-summary',
   templateUrl: './summary.component.html',
   styleUrls: ['./summary.component.css'],
 })
 export class SummaryComponent implements OnInit {
+  isLoading = true;
   isMobile: boolean;
   observerSubscription: Subscription;
   summary: CountrySummary[];
@@ -32,7 +35,8 @@ export class SummaryComponent implements OnInit {
 
   constructor(
     private covid19ApiSrv: Covid19ApiService,
-    breakpointObserver: BreakpointObserver
+    breakpointObserver: BreakpointObserver,
+    public dialog: MatDialog
   ) {
     this.observerSubscription = breakpointObserver
       .observe([Breakpoints.XSmall, Breakpoints.HandsetPortrait])
@@ -60,6 +64,13 @@ export class SummaryComponent implements OnInit {
       });
   }
 
+  openDialog(message) {
+    this.dialog.open(DialogComponent, {
+      data: {
+        message: message,
+      },
+    });
+  }
   ngOnInit(): void {
     this.getAllSummary();
     this.dataSource.paginator = this.paginator;
@@ -70,9 +81,11 @@ export class SummaryComponent implements OnInit {
     this.covid19ApiSrv.getSummary().subscribe(
       (data) => {
         this.dataSource.data = data['Countries'] as CountrySummary[];
+        this.isLoading = false;
       },
       (error) => {
         console.log(error);
+        this.openDialog(error);
       }
     );
   }
